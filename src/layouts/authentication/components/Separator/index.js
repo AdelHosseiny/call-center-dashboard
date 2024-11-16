@@ -33,8 +33,8 @@ function Separator() {
         lineHeight={1}
         sx={{ transform: "translate(-50%, -60%)" }}
       >
-        <SoftTypography variant="button" fontWeight="medium" color="secondary">
-          or
+        <SoftTypography variant="button" fontWeight="medium" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+          یا
         </SoftTypography>
       </SoftBox>
     </SoftBox>

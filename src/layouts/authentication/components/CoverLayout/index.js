@@ -30,14 +30,14 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 // Authentication layout components
 import Footer from "layouts/authentication/components/Footer";
 
-function CoverLayout({ color, header, title, description, image, top, children }) {
+function CoverLayout({ color, header, title, description, image, top, children, xl }) {
   return (
     <PageLayout background="white">
       <DefaultNavbar
         action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
-          label: "free download",
+          type: "internal",
+          route: "/uploader",
+          label: "درخواست جدید",
           color: "dark",
         }}
       />
@@ -49,17 +49,17 @@ function CoverLayout({ color, header, title, description, image, top, children }
           margin: 0,
         }}
       >
-        <Grid item xs={11} sm={8} md={5} xl={3}>
+        <Grid item xs={11} sm={8} md={10} xl={xl}>
           <SoftBox mt={top}>
-            <SoftBox pt={3} px={3}>
+            <SoftBox pt={3} px={3} style={{direction:"rtl", fontFamily:"Yekan"}}>
               {!header ? (
                 <>
-                  <SoftBox mb={1}>
-                    <SoftTypography variant="h3" fontWeight="bold" color={color} textGradient>
+                  <SoftBox mb={3}>
+                    <SoftTypography variant="h3" fontWeight="bold" color={color} textGradient style={{direction:"rtl", fontFamily:"Yekan"}}>
                       {title}
                     </SoftTypography>
                   </SoftBox>
-                  <SoftTypography variant="body2" fontWeight="regular" color="text">
+                  <SoftTypography variant="body2" fontWeight="regular" color="text" style={{direction:"rtl", fontFamily:"Yekan"}}>
                     {description}
                   </SoftTypography>
                 </>
@@ -70,7 +70,7 @@ function CoverLayout({ color, header, title, description, image, top, children }
             <SoftBox p={3}>{children}</SoftBox>
           </SoftBox>
         </Grid>
-        <Grid item xs={12} md={5}>
+        {image !== "noImage" && <Grid item xs={12} md={5}>
           <SoftBox
             height="100%"
             display={{ xs: "none", md: "block" }}
@@ -93,7 +93,7 @@ function CoverLayout({ color, header, title, description, image, top, children }
               }}
             />
           </SoftBox>
-        </Grid>
+        </Grid>}
       </Grid>
       <Footer />
     </PageLayout>
@@ -107,6 +107,7 @@ CoverLayout.defaultProps = {
   description: "",
   color: "info",
   top: 20,
+  xl: 3,
 };
 
 // Typechecking props for the CoverLayout
@@ -127,6 +128,7 @@ CoverLayout.propTypes = {
   image: PropTypes.string.isRequired,
   top: PropTypes.number,
   children: PropTypes.node.isRequired,
+  xl: PropTypes.number.isRequired
 };
 
 export default CoverLayout;

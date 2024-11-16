@@ -51,6 +51,7 @@ function DefaultNavbarLink({ icon, name, route, light }) {
         color={light ? "white" : "dark"}
         textTransform="capitalize"
         sx={{ width: "100%", lineHeight: 0 }}
+        style={{direction:"rtl", fontFamily:"Yekan"}}
       >
         &nbsp;{name}
       </SoftTypography>

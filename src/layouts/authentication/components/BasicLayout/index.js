@@ -35,9 +35,9 @@ function BasicLayout({ title, description, image, children }) {
     <PageLayout>
       <DefaultNavbar
         action={{
-          type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
-          label: "free download",
+          type: "internal",
+          route: "/uploader",
+          label: "درخواست جدید",
         }}
         transparent
         light
@@ -65,12 +65,12 @@ function BasicLayout({ title, description, image, children }) {
         <Grid container spacing={3} justifyContent="center" sx={{ textAlign: "center" }}>
           <Grid item xs={10} lg={4}>
             <SoftBox mt={6} mb={1}>
-              <SoftTypography variant="h1" color="white" fontWeight="bold">
+              <SoftTypography variant="h1" color="white" fontWeight="bold" style={{direction:"rtl", fontFamily:"Yekan"}}>
                 {title}
               </SoftTypography>
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftTypography variant="body2" color="white" fontWeight="regular">
+              <SoftTypography variant="body2" color="white" fontWeight="regular" style={{direction:"rtl", fontFamily:"Yekan"}}>
                 {description}
               </SoftTypography>
             </SoftBox>

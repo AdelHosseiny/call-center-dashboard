@@ -92,29 +92,29 @@ function DefaultNavbar({ transparent, light, action }) {
         })}
       >
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Soft UI Dashboard
+          <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"} style={{direction:"rtl", fontFamily:"Yekan"}}>
+            تماس هوشمند
           </SoftTypography>
         </SoftBox>
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
+          <DefaultNavbarLink icon="donut_large" name="داشبورد" route="/dashboard" light={light} />
+          <DefaultNavbarLink icon="person" name="پروفایل" route="/profile" light={light} />
           <DefaultNavbarLink
             icon="account_circle"
-            name="sign up"
+            name="ثبت نام"
             route="/authentication/sign-up"
             light={light}
           />
           <DefaultNavbarLink
             icon="key"
-            name="sign in"
+            name="ورود"
             route="/authentication/sign-in"
             light={light}
           />
         </SoftBox>
         {action &&
           (action.type === "internal" ? (
-            <SoftBox display={{ xs: "none", lg: "inline-block" }}>
+            <SoftBox display={{ xs: "none", lg: "inline-block" }} style={{direction:"rtl", fontFamily:"Yekan"}}>
               <SoftButton
                 component={Link}
                 to={action.route}
@@ -122,6 +122,7 @@ function DefaultNavbar({ transparent, light, action }) {
                 color={action.color ? action.color : "info"}
                 size="small"
                 circular
+                style={{direction:"rtl", fontFamily:"Yekan"}}
               >
                 {action.label}
               </SoftButton>

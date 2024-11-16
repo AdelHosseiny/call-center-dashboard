@@ -43,14 +43,14 @@ function SignUp() {
 
   return (
     <BasicLayout
-      title="Welcome!"
-      description="Use these awesome forms to login or create new account in your project for free."
+      title="خوش آمدید"
+      description="برای ثبت نام اطلاعات زیر را تکمیل نمایید"
       image={curved6}
     >
       <Card>
         <SoftBox p={3} mb={1} textAlign="center">
-          <SoftTypography variant="h5" fontWeight="medium">
-            Register with
+          <SoftTypography variant="h5" fontWeight="medium" style={{direction:"rtl", fontFamily:"Yekan"}}>
+            ثبت نام از طریق
           </SoftTypography>
         </SoftBox>
         <SoftBox mb={2}>
@@ -68,15 +68,16 @@ function SignUp() {
             <SoftBox mb={2}>
               <SoftInput type="password" placeholder="Password" />
             </SoftBox>
-            <SoftBox display="flex" alignItems="center">
+            <SoftBox display="flex" alignItems="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
               <SoftTypography
                 variant="button"
                 fontWeight="regular"
                 onClick={handleSetAgremment}
                 sx={{ cursor: "poiner", userSelect: "none" }}
+                style={{direction:"rtl", fontFamily:"Yekan"}}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;با&nbsp;
               </SoftTypography>
               <SoftTypography
                 component="a"
@@ -84,18 +85,28 @@ function SignUp() {
                 variant="button"
                 fontWeight="bold"
                 textGradient
+                style={{direction:"rtl", fontFamily:"Yekan"}}
               >
-                Terms and Conditions
+                شرایط
+              </SoftTypography>
+              <SoftTypography
+                variant="button"
+                fontWeight="regular"
+                onClick={handleSetAgremment}
+                sx={{ cursor: "poiner", userSelect: "none" }}
+                style={{direction:"rtl", fontFamily:"Yekan"}}
+              >
+                &nbsp;&nbsp;موافقم&nbsp;
               </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="dark" fullWidth>
-                sign up
+              <SoftButton variant="gradient" color="dark" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}}>
+                ثبت نام
               </SoftButton>
             </SoftBox>
-            <SoftBox mt={3} textAlign="center">
-              <SoftTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
+            <SoftBox mt={3} textAlign="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
+              <SoftTypography variant="button" color="text" fontWeight="regular" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                قبلا ثبت نام کردیده اید؟&nbsp;
                 <SoftTypography
                   component={Link}
                   to="/authentication/sign-in"
@@ -103,8 +114,9 @@ function SignUp() {
                   color="dark"
                   fontWeight="bold"
                   textGradient
+                  style={{direction:"rtl", fontFamily:"Yekan"}}
                 >
-                  Sign in
+                  ورود
                 </SoftTypography>
               </SoftTypography>
             </SoftBox>

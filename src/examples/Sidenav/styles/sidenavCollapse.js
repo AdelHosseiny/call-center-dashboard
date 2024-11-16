@@ -130,6 +130,7 @@ function collapseText(theme, ownerState) {
       fontWeight: active ? fontWeightMedium : fontWeightRegular,
       fontSize: size.sm,
       lineHeight: 0,
+      fontFamily: "Yekan"
     },
   };
 }

@@ -17,6 +17,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "App";
+import "App.css";
+
+// Importing Provider from react-redux
+import { Provider } from "react-redux";
+
+// Import the store you created
+import store from "./redux/store";  // Adjust the path according to your directory structure
+
 
 // Soft UI Dashboard React Context Provider
 import { SoftUIControllerProvider } from "context";
@@ -24,8 +32,10 @@ import { SoftUIControllerProvider } from "context";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <SoftUIControllerProvider>
-      <App />
-    </SoftUIControllerProvider>
+    <Provider store={store}> {/* Wrapping App with Provider */}
+      <SoftUIControllerProvider>
+        <App />
+      </SoftUIControllerProvider>
+    </Provider>
   </BrowserRouter>
 );

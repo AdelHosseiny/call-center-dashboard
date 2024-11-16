@@ -66,7 +66,7 @@ function Projects() {
           <SoftTypography variant="h6" gutterBottom>
             Projects
           </SoftTypography>
-          <SoftBox display="flex" alignItems="center" lineHeight={0}>
+          {/* <SoftBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
               sx={{
                 fontWeight: "bold",
@@ -79,7 +79,7 @@ function Projects() {
             <SoftTypography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 done</strong> this month
             </SoftTypography>
-          </SoftBox>
+          </SoftBox> */}
         </SoftBox>
         <SoftBox color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>

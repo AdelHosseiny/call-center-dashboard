@@ -41,11 +41,13 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import curved0 from "assets/images/curved-images/curved0.jpg";
+import { useSelector } from 'react-redux'; // Import useSelector
 
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
-
+  const user_name = useSelector(state => state.user.user_name);
+  
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
     function handleTabsOrientation() {
@@ -113,7 +115,7 @@ function Header() {
           <Grid item>
             <SoftBox height="100%" mt={0.5} lineHeight={1}>
               <SoftTypography variant="h5" fontWeight="medium">
-                Alex Thompson
+                {user_name}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
                 CEO / Co-Founder

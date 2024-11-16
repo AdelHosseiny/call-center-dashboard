@@ -40,46 +40,47 @@ function SignIn() {
 
   return (
     <CoverLayout
-      title="Welcome back"
-      description="Enter your email and password to sign in"
+      title="خوش آمدید"
+      description="آدرس ایمیل و رمز عبور خود را وارد نمایید"
       image={curved9}
     >
       <SoftBox component="form" role="form">
-        <SoftBox mb={2}>
+        <SoftBox mb={2} style={{direction:"rtl", fontFamily:"Yekan"}}>
           <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email
+            <SoftTypography component="label" variant="caption" fontWeight="bold" style={{direction:"rtl", fontFamily:"Yekan"}}>
+              آدرس ایمیل
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="email" placeholder="Email" />
+          <SoftInput type="email" placeholder="Email" style={{direction:"ltr"}}/>
         </SoftBox>
-        <SoftBox mb={2}>
+        <SoftBox mb={2} style={{direction:"rtl", fontFamily:"Yekan"}}>
           <SoftBox mb={1} ml={0.5}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Password
+            <SoftTypography component="label" variant="caption" fontWeight="bold" style={{direction:"rtl", fontFamily:"Yekan"}}>
+              رمز عبور
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="password" placeholder="Password" />
+          <SoftInput type="password" placeholder="Password" style={{direction:"ltr"}}/>
         </SoftBox>
-        <SoftBox display="flex" alignItems="center">
+        <SoftBox display="flex" alignItems="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
           <Switch checked={rememberMe} onChange={handleSetRememberMe} />
           <SoftTypography
             variant="button"
             fontWeight="regular"
             onClick={handleSetRememberMe}
             sx={{ cursor: "pointer", userSelect: "none" }}
+            style={{direction:"rtl", fontFamily:"Yekan"}}
           >
-            &nbsp;&nbsp;Remember me
+            &nbsp;&nbsp;مرا به خاطر بسپار
           </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" fullWidth>
-            sign in
+          <SoftButton variant="gradient" color="info" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}}>
+            ورود
           </SoftButton>
         </SoftBox>
-        <SoftBox mt={3} textAlign="center">
-          <SoftTypography variant="button" color="text" fontWeight="regular">
-            Don&apos;t have an account?{" "}
+        <SoftBox mt={3} textAlign="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
+          <SoftTypography variant="button" color="text" fontWeight="regular" style={{direction:"rtl", fontFamily:"Yekan"}}>
+            تا کنون ثبت نام نکرده اید؟{" "}
             <SoftTypography
               component={Link}
               to="/authentication/sign-up"
@@ -87,8 +88,9 @@ function SignIn() {
               color="info"
               fontWeight="medium"
               textGradient
+              style={{direction:"rtl", fontFamily:"Yekan"}}
             >
-              Sign up
+              ثبت نام
             </SoftTypography>
           </SoftTypography>
         </SoftBox>

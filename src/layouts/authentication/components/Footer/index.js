@@ -32,37 +32,37 @@ function Footer() {
     <SoftBox component="footer" py={6}>
       <Grid container justifyContent="center">
         <Grid item xs={10} lg={8}>
-          <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
+          <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3} style={{direction:"rtl", fontFamily:"Yekan"}}>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Company
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                شرکت
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                About Us
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                درباره ما
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 0, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Team
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                کارکنان
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Product
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                محصول
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Blog
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                قیمت
               </SoftTypography>
             </SoftBox>
-            <SoftBox>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Pricing
+            {/* <SoftBox>
+              <SoftTypography component="a" href="#" variant="body2" color="secondary" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                مقالات
               </SoftTypography>
-            </SoftBox>
+            </SoftBox> */}
           </SoftBox>
         </Grid>
         <Grid item xs={12} lg={8}>
@@ -84,11 +84,11 @@ function Footer() {
             </SoftBox>
           </SoftBox>
         </Grid>
-        <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
+        {/* <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
           <SoftTypography variant="body2" color="secondary">
             Copyright &copy; 2021 Soft by Creative Tim.
           </SoftTypography>
-        </Grid>
+        </Grid> */}
       </Grid>
     </SoftBox>
   );

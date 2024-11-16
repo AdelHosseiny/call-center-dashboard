@@ -14,6 +14,9 @@ Coded by www.creative-tim.com
 */
 
 // @mui material components
+import React, { useEffect, useState } from "react";
+import { useSelector } from 'react-redux'; // Import useSelector
+
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
@@ -41,16 +44,46 @@ import OrderOverview from "layouts/dashboard/components/OrderOverview";
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
+import Header from "layouts/profile/components/Header";
 
 function Dashboard() {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
+
+  const [apiData, setApiData] = useState(null); // State to store API response
+  const [loading, setLoading] = useState(true); // State for loading status
+  const [error, setError] = useState(null); // State for error handling
+  // const ticket = "adel.hosseiny@gmail.com"; // Replace this with dynamic ticket if needed
+  const user_name = useSelector(state => state.user.user_name);
+  console.log("user name in dashboard is :", user_name);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://81.12.53.242:8081/get_status?ticket=${user_name}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch API data");
+        }
+        const data = await response.json();
+        setApiData(data); // Store API response in state
+        setLoading(false);
+        console.log(data);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [user_name]);
+
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      {/* <DashboardNavbar /> */}
+      <Header></Header>
       <SoftBox py={3}>
-        <SoftBox mb={3}>
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
               <MiniStatisticsCard
@@ -88,8 +121,18 @@ function Dashboard() {
               />
             </Grid>
           </Grid>
-        </SoftBox>
+        </SoftBox> */}
         <SoftBox mb={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={8}>
+              <Projects />
+            </Grid>
+            <Grid item xs={12} md={6} lg={4}>
+              <OrderOverview />
+            </Grid>
+          </Grid>
+        </SoftBox>
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={7}>
               <BuildByDevelopers />
@@ -98,8 +141,8 @@ function Dashboard() {
               <WorkWithTheRockets />
             </Grid>
           </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
+        </SoftBox> */}
+        {/* <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} lg={5}>
               <ReportsBarChart
@@ -134,15 +177,8 @@ function Dashboard() {
               />
             </Grid>
           </Grid>
-        </SoftBox>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
-          </Grid>
-        </Grid>
+        </SoftBox> */}
+        
       </SoftBox>
       <Footer />
     </DashboardLayout>
