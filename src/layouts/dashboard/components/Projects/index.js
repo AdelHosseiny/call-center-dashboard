@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -24,16 +24,46 @@ import MenuItem from "@mui/material/MenuItem";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import PropTypes from "prop-types";
 
 // Soft UI Dashboard Materail-UI example components
 import Table from "examples/Tables/Table";
 
 // Data
-import data from "layouts/dashboard/components/Projects/data";
+import BusinessTable from "../BusinessTables/BusinessTable";
+import SoftProgress from "components/SoftProgress";
+import logoXD from "assets/images/small-logos/logo-xd.svg";
 
-function Projects() {
-  const { columns, rows } = data();
+function Projects({apiData}) {
+  const [rows, setRows] = useState([]);
   const [menu, setMenu] = useState(null);
+  useEffect(() => {
+    console.log("in Projects apiData is:", apiData)
+    const generatedRows = apiData.map((row, key) => ({
+    
+        
+          companies: [logoXD, row[5]],
+          members: (
+            <SoftTypography variant="caption" color="text" fontWeight="medium" style={{direction:"rtl", fontFamily:"Yekan"}}>
+              {"Ticket-"+row[0]}
+            </SoftTypography>
+          ),
+          budget: (
+            <SoftTypography variant="caption" color="text" fontWeight="medium" style={{direction:"rtl", fontFamily:"Yekan"}}>
+              {row[2] === "preprocessing" ? "در حال پردازش اولیه داده ها" : row[2] === "createmodel" ? "در حال ساخت مدل شما" : "تکمیل"}
+            </SoftTypography>
+          ),
+          completion: (
+            <SoftBox width="8rem" textAlign="left">
+              <SoftProgress value={row[6]} color="info" variant="gradient" label={false} />
+            </SoftBox>
+          ),
+        
+      
+    }));
+    console.log("generatedRows:", generatedRows)
+    setRows(generatedRows);
+  }, [apiData]);
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
@@ -61,12 +91,12 @@ function Projects() {
 
   return (
     <Card>
-      <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+      {/* <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <SoftBox>
           <SoftTypography variant="h6" gutterBottom>
-            Projects
+            پروژه ها
           </SoftTypography>
-          {/* <SoftBox display="flex" alignItems="center" lineHeight={0}>
+          <SoftBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
               sx={{
                 fontWeight: "bold",
@@ -79,7 +109,7 @@ function Projects() {
             <SoftTypography variant="button" fontWeight="regular" color="text">
               &nbsp;<strong>30 done</strong> this month
             </SoftTypography>
-          </SoftBox> */}
+          </SoftBox> 
         </SoftBox>
         <SoftBox color="text" px={2}>
           <Icon sx={{ cursor: "pointer", fontWeight: "bold" }} fontSize="small" onClick={openMenu}>
@@ -87,7 +117,7 @@ function Projects() {
           </Icon>
         </SoftBox>
         {renderMenu}
-      </SoftBox>
+      </SoftBox> */}
       <SoftBox
         sx={{
           "& .MuiTableRow-root:not(:last-child)": {
@@ -98,10 +128,21 @@ function Projects() {
           },
         }}
       >
-        <Table columns={columns} rows={rows} />
+        {/* <Table columns={columns} rows={rows} /> */}
+        <BusinessTable rows={rows} ></BusinessTable>
       </SoftBox>
     </Card>
   );
 }
+
+// Setting default values for the props of Table
+Projects.defaultProps = {
+  apiData: [{}],
+};
+
+// Typechecking props for the Table
+Projects.propTypes = {
+  apiData: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default Projects;

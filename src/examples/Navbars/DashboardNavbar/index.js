@@ -192,7 +192,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleConfiguratorOpen}
               >
                 <Icon>settings</Icon>
-              </IconButton>
+              </IconButton>*/}
               <IconButton
                 size="small"
                 color="inherit"
@@ -203,7 +203,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
                 onClick={handleOpenMenu}
               >
                 <Icon className={light ? "text-white" : "text-dark"}>notifications</Icon>
-              </IconButton> */}
+              </IconButton> 
               {renderMenu()}
             </SoftBox>
           </SoftBox>

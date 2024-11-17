@@ -117,12 +117,12 @@ function Header() {
               <SoftTypography variant="h5" fontWeight="medium">
                 {user_name}
               </SoftTypography>
-              <SoftTypography variant="button" color="text" fontWeight="medium">
+              {/* <SoftTypography variant="button" color="text" fontWeight="medium">
                 CEO / Co-Founder
-              </SoftTypography>
+              </SoftTypography> */}
             </SoftBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+          {/* <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs
                 orientation={tabsOrientation}
@@ -135,7 +135,7 @@ function Header() {
                 <Tab label="Settings" icon={<Settings />} />
               </Tabs>
             </AppBar>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Card>
     </SoftBox>

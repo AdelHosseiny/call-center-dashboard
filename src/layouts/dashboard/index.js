@@ -51,11 +51,11 @@ function Dashboard() {
   const { chart, items } = reportsBarChartData;
 
 
-  const [apiData, setApiData] = useState(null); // State to store API response
+  const [apiData, setApiData] = useState([]); // State to store API response
   const [loading, setLoading] = useState(true); // State for loading status
   const [error, setError] = useState(null); // State for error handling
-  // const ticket = "adel.hosseiny@gmail.com"; // Replace this with dynamic ticket if needed
   const user_name = useSelector(state => state.user.user_name);
+  //const user_name = "adel.hosseiny@gmail.com";
   console.log("user name in dashboard is :", user_name);
 
   useEffect(() => {
@@ -125,7 +125,7 @@ function Dashboard() {
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
-              <Projects />
+              <Projects apiData={apiData}/>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <OrderOverview />

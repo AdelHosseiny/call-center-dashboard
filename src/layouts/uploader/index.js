@@ -41,12 +41,25 @@ import KnowledgeInformation from "./components/KnowledgeInformation";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 
+import Menu from "@mui/material/Menu";
+
+// Images
+import team2 from "assets/images/team-2.jpg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import NotificationItem from "./components/Items/NotificationItem";
+
+
 function Uploader() {
   const [rememberMe, setRememberMe] = useState(true);
   const [uploadFile, setUploadFile] = useState("");
   const [uploadStep, setUploadStep] = useState("upload");
   const [qaPairs, setQAPairs] = useState([]);
-  const [user_name, setUserNameLocal] = useState("");
+  const [userName, setUserNameLocal] = useState("");
+  const [projectName, setProjectName] = useState("");
+  const [openMenu, setOpenMenu] = useState(false);
+  const handleCloseMenu = () => setOpenMenu(false);
+  const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
+
   const dispatch = useDispatch(); // Initialize useDispatch
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
@@ -66,6 +79,7 @@ function Uploader() {
 
   const removeUploadFile = () => {
     setUploadFile("");
+    fileInputRef.current.value = "";
   }
 
   const dragUploadFile = (e) => {
@@ -156,11 +170,12 @@ function Uploader() {
   
     // Prepare data to send
     const data = {
-      name: user_name,
+      userName: userName,
+      projectName: projectName,
       qaPairs: qaPairs,
     };
     // console.log("user name in uploader:")
-    dispatch(setUserName(user_name));
+    dispatch(setUserName(userName));
     // Send a POST request
     fetch(apiUrl, {
       method: "POST",
@@ -192,6 +207,112 @@ function Uploader() {
     // console.log("user name in uploader:")
     setUserNameLocal(e.target.value);
   }
+
+  const changeProjectName = (e) => {
+    // console.log("user name in uploader:")
+    setProjectName(e.target.value);
+  }
+
+  const generateManual = () => {
+    setQAPairs([{
+      messages:[
+        {
+          role: "user",
+          content: ""
+        },
+        {
+          role: "assistant",
+          content: ""
+        }
+      ]
+    }]);
+
+    setUploadStep("review");
+
+  }
+
+
+  const renderMenu = () => (
+    <Menu
+      anchorEl={openMenu}
+      anchorReference={null}
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      open={Boolean(openMenu)}
+      onClose={handleCloseMenu}
+      sx={{ mt: 0 }}
+    >
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["لطفا صفحه کلید خود را بر روی زبان فارسی تنظیم نمایید"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["مکالمات مورد نظر خود را تایپ نمایید.\n هر مکالمه شامل تعدادی پرسش و پاسخ می باشد"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["هر مکالمه با آکولاد باز آغاز و با آکولاد بسته خاتمه پیدا می کند"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["هر پرسش با کلمه کلیدی پرسش: شروع می شود. همجنین هر پاسخ با کلمه کلیدی پاسخ: شروع می شود"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["هر پرسش با یک پاسخ همراه می شود"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["یک نمونه از مکالمه مانند ذیل می باشد"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["{\nپرسش:\n\t این سامانه چه کاربردی دارد؟\n پاسخ:\n\t در پاسخگویی به کاربران کاربرد دارد\n}"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{whiteSpace: "pre-wrap", direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["یک نمونه از فایل شامل دو مکالمه، مکالمه اول یک پرسش و پاسخ و مکالمه دوم دو پرسش و پاسخ در ذیل می باشد"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+
+      <NotificationItem
+        // image={<img src={team2} alt="person" />}
+        title={["{\nپرسش:\n\t این سامانه چه کاربردی دارد؟\n پاسخ:\n\t در پاسخگویی به کاربران کاربرد دارد\n}\n{\nپرسش:\n\t هزینه استفاده از این سامانه چقدر است؟\n پاسخ:\n\t هزینه استفاده از این سامانه بسیار مقرون به صرفه می باشد\n}"]}
+        // date="13 minutes ago"
+        onClick={handleCloseMenu}
+        style={{whiteSpace: "pre-wrap", direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}
+      />
+      
+    </Menu>
+  );
   
 
 
@@ -204,7 +325,38 @@ function Uploader() {
       xl={3}
     >
       <SoftBox component="form" role="form">
-        
+        <SoftBox mt={3} textAlign="center" style={{direction:"rtl", fontFamily:"Yekan", textAlign:"justify"}}>
+          <SoftTypography variant="button" color="text" fontWeight="regular" style={{direction:"rtl", fontFamily:"Yekan"}}>
+            در صورت تمایل می توانید اطلاعات مکالمات مورد نیاز را بدون آپلود فایل در {" "}
+            <SoftTypography
+              component={Link}
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+              style={{direction:"rtl", fontFamily:"Yekan", cursor:"hand"}}
+              onClick={generateManual}
+              
+            >
+              اینجا
+            </SoftTypography>
+            {" "}و به صورت مرحله به مرحله تولید نمایید. در صورت نیاز به راهنمایی برای آپلود، 
+            <SoftTypography
+              component={Link}
+              variant="button"
+              color="info"
+              fontWeight="medium"
+              textGradient
+              style={{direction:"rtl", fontFamily:"Yekan", cursor:"hand"}}
+              onClick={handleOpenMenu}
+              
+            >
+              راهنما
+            </SoftTypography>
+            {" "}را مطالعه نمایید
+          </SoftTypography>
+          {renderMenu()}
+        </SoftBox>
         <SoftBox mb={2}>
           <div className="uploader-drop_box" onDrop={dragUploadFile} onDragOver={dragOverUploadFile}>
             <header>
@@ -236,6 +388,16 @@ function Uploader() {
             آنالیز فایل
           </SoftButton>
         </SoftBox>
+
+
+
+
+        
+
+
+
+
+
         <SoftBox mt={3} textAlign="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
           <SoftTypography variant="button" color="text" fontWeight="regular" style={{direction:"rtl", fontFamily:"Yekan"}}>
             تاکنون ثبت نام نکرده اید؟{" "}
@@ -264,7 +426,11 @@ function Uploader() {
   >
           <KnowledgeInformation 
             qaPairs = {qaPairs}
-            setUploadStep = {setUploadStep}></KnowledgeInformation>
+            setUploadStep = {setUploadStep}
+            setQAPairs={setQAPairs}
+            removeUploadFile={removeUploadFile}>
+          </KnowledgeInformation>
+
     </CoverLayout> :
     uploadStep === "submit" ?
       <CoverLayout
@@ -279,7 +445,13 @@ function Uploader() {
                 آدرس ایمیل
               </SoftTypography>
             </SoftBox>
-            <SoftInput type="email" placeholder="Email" value={user_name} style={{direction:"ltr"}} onChange={changeUserName}/>
+            <SoftInput type="email" placeholder="ایمیل" value={userName} style={{direction:"ltr", fontFamily: "Yekan"}} onChange={changeUserName}/>
+            <SoftBox mb={1} ml={0.5}>
+              <SoftTypography component="label" variant="caption" fontWeight="bold" style={{direction:"rtl", fontFamily:"Yekan"}}>
+                نام پروژه
+              </SoftTypography>
+            </SoftBox>
+            <SoftInput type="text" placeholder="نام پروژه" value={projectName} style={{direction:"rtl", fontFamily: "Yekan"}} onChange={changeProjectName} />
           </SoftBox>
           
           
