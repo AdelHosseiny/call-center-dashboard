@@ -14,7 +14,8 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
-
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { setUserName } from '../../../redux/userSlice'; // Import the action
 // react-router-dom components
 import { Link } from "react-router-dom";
 
@@ -32,11 +33,62 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 
 // Images
 import curved9 from "assets/images/curved-images/curved-6.jpg";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [rememberMe, setRememberMe] = useState(true);
-
+  const [userName, setUserNameLocal] = useState("");
+  const [password, setPassword] = useState("");
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const dispatch = useDispatch(); // Initialize useDispatch
+  const navigate = useNavigate();
+
+  const loginUser = () => {
+    const apiUrl = "http://81.12.53.242:8081/login";
+  
+    // Prepare data to send
+    const data = {
+      user_name: userName,
+      password: password,
+    };
+    // console.log("user name in uploader:")
+    
+    // Send a POST request
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Assuming the API sends a JSON response
+      })
+      .then((responseData) => {
+        
+
+        console.log("Successfully sent qaPairs to API:", responseData);
+        dispatch(setUserName(userName));
+        navigate("/dashboard");
+
+      })
+      .catch((error) => {
+        console.error("Error sending qaPairs to API:", error);
+      });
+  }
+
+  const changeUserName = (e) => {
+    setUserNameLocal(e.target.value);
+  }
+
+  const changePassword = (e) => {
+    setPassword (e.target.value);
+  }
+
 
   return (
     <CoverLayout
@@ -51,7 +103,7 @@ function SignIn() {
               آدرس ایمیل
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="email" placeholder="Email" style={{direction:"ltr"}}/>
+          <SoftInput type="email" placeholder="Email" style={{direction:"ltr"}} onChange={changeUserName}/>
         </SoftBox>
         <SoftBox mb={2} style={{direction:"rtl", fontFamily:"Yekan"}}>
           <SoftBox mb={1} ml={0.5}>
@@ -59,7 +111,7 @@ function SignIn() {
               رمز عبور
             </SoftTypography>
           </SoftBox>
-          <SoftInput type="password" placeholder="Password" style={{direction:"ltr"}}/>
+          <SoftInput type="password" placeholder="Password" style={{direction:"ltr"}} onChange={changePassword}/>
         </SoftBox>
         <SoftBox display="flex" alignItems="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
           <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -74,7 +126,7 @@ function SignIn() {
           </SoftTypography>
         </SoftBox>
         <SoftBox mt={4} mb={1}>
-          <SoftButton variant="gradient" color="info" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}}>
+          <SoftButton variant="gradient" color="info" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}} onClick={loginUser}>
             ورود
           </SoftButton>
         </SoftBox>

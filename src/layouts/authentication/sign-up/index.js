@@ -14,6 +14,8 @@ Coded by www.creative-tim.com
 */
 
 import { useState } from "react";
+import { useDispatch } from 'react-redux'; // Import useDispatch
+import { setUserName } from '../../../redux/userSlice'; // Import the action
 
 // react-router-dom components
 import { Link } from "react-router-dom";
@@ -35,11 +37,61 @@ import Separator from "layouts/authentication/components/Separator";
 
 // Images
 import curved6 from "assets/images/curved-images/curved14.jpg";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [agreement, setAgremment] = useState(true);
+  const [userName, setUserNameLocal] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSetAgremment = () => setAgremment(!agreement);
+  const dispatch = useDispatch(); // Initialize useDispatch
+  const navigate = useNavigate();
+
+  const registerUser = () => {
+    const apiUrl = "http://81.12.53.242:8081/register";
+  
+    // Prepare data to send
+    const data = {
+      user_name: userName,
+      password: password,
+    };
+    // console.log("user name in uploader:")
+    
+    // Send a POST request
+    fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json(); // Assuming the API sends a JSON response
+      })
+      .then((responseData) => {
+        
+
+        console.log("Successfully sent qaPairs to API:", responseData);
+        dispatch(setUserName(userName));
+        navigate("/dashboard");
+
+      })
+      .catch((error) => {
+        console.error("Error sending qaPairs to API:", error);
+      });
+  }
+
+  const changeUserName = (e) => {
+    setUserNameLocal(e.target.value);
+  }
+
+  const changePassword = (e) => {
+    setPassword (e.target.value);
+  }
 
   return (
     <BasicLayout
@@ -59,14 +111,12 @@ function SignUp() {
         <Separator />
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
+            
             <SoftBox mb={2}>
-              <SoftInput placeholder="Name" />
+              <SoftInput type="email" placeholder="Email" value={userName} onChange={changeUserName}/>
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="email" placeholder="Email" />
-            </SoftBox>
-            <SoftBox mb={2}>
-              <SoftInput type="password" placeholder="Password" />
+              <SoftInput type="password" placeholder="Password" value={password} onChange={changePassword}/>
             </SoftBox>
             <SoftBox display="flex" alignItems="center" style={{direction:"rtl", fontFamily:"Yekan"}}>
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
@@ -100,7 +150,7 @@ function SignUp() {
               </SoftTypography>
             </SoftBox>
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="dark" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}}>
+              <SoftButton variant="gradient" color="dark" fullWidth style={{direction:"rtl", fontFamily:"Yekan"}} onClick={registerUser}>
                 ثبت نام
               </SoftButton>
             </SoftBox>
